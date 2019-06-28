@@ -1,23 +1,61 @@
-import { ADD_POST, ADD_POSTS, DELETE_POST } from './PostActions';
+import {
+  ADD_POST,
+  ADD_POSTS,
+  DELETE_POST,
+  EDIT_POST,
+  THUMB_UP_POST,
+  THUMB_DOWN_POST,
+} from './PostActions';
 
 // Initial State
 const initialState = { data: [] };
 
 const PostReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_POST :
+    case ADD_POST:
       return {
         data: [action.post, ...state.data],
       };
 
-    case ADD_POSTS :
+    case ADD_POSTS:
       return {
         data: action.posts,
       };
 
-    case DELETE_POST :
+    case DELETE_POST:
       return {
         data: state.data.filter(post => post.cuid !== action.cuid),
+      };
+
+    case EDIT_POST:
+      return {
+        data: state.data.map(post => {
+          return post.cuid === action.ciud
+            ? Object.assign({}, post, action.post)
+            : post;
+        }),
+      };
+
+    case THUMB_UP_POST:
+      return {
+        data: state.data.map(post => {
+          const newPost = post;
+          if (post.cuid === action.cuid) {
+            newPost.voteCount++;
+          }
+          return newPost;
+        }),
+      };
+
+    case THUMB_DOWN_POST:
+      return {
+        data: state.data.map(post => {
+          const newPost = post;
+          if (post.cuid === action.cuid) {
+            newPost.voteCount--;
+          }
+          return newPost;
+        }),
       };
 
     default:
@@ -31,7 +69,8 @@ const PostReducer = (state = initialState, action) => {
 export const getPosts = state => state.posts.data;
 
 // Get post by cuid
-export const getPost = (state, cuid) => state.posts.data.filter(post => post.cuid === cuid)[0];
+export const getPost = (state, cuid) =>
+  state.posts.data.filter(post => post.cuid === cuid)[0];
 
 // Export Reducer
 export default PostReducer;
