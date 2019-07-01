@@ -1,8 +1,9 @@
 .container {
-    max-width: 980px;
+    max-width: 1200px;
     width: 100%;
     padding: 15px;
     margin: 0 auto;
+    min-height: 60vh;
     background-image: url('https://designrfix.com/wp-content/uploads/2013/01/Patterns-free-2013-jan-19.jpg');
     /* background-size: cover; */
 }

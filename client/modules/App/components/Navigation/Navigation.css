@@ -1,0 +1,27 @@
+.container {
+    width: 100%;
+    padding: 15px;
+    background-color: #AF4C4C;
+    border-bottom: 1px solid #C3933C;
+
+}
+
+.navigation {
+    display: flex;
+    justify-content: flex-end;
+    list-style: none;
+    margin-right: 22px;
+}
+
+.navigation_item {
+    margin-left: 20px;
+}
+
+.navigation_link {
+    text-decoration: none;
+    color: #C3933C;
+}
+
+.navigation_link:hover {
+    color: #ffff;
+}
